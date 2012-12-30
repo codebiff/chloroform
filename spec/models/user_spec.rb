@@ -33,8 +33,19 @@ describe User do
     user.should_not be_kind_of User
   end
 
-  it "should generate an email validation token"
-  it "should not be validated"
-  it "should generate an API key"
+  it "should generate an email validation token" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.validation_token.should_not be_nil
+  end
+
+  it "should not be validated" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.validated.should_not be_true 
+  end
+
+  it "should generate an API key" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.api_key.should_not be_nil
+  end
 
 end
