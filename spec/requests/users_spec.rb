@@ -16,6 +16,7 @@ describe "Users" do
         fill_in "password", with: "password"
         click_button "Login"
       }.to change(User, :count).by(1)
+      page.should have_content "joe@example.com"
     end
 
   end

@@ -29,6 +29,11 @@ describe UserController do
         post :login, :email => "joe@example.com", :password => "password"
         response.should redirect_to user_account_path
       end
+
+      it "should set the user session" do
+        post :login, :email => "joe@example.com", :password => "password"
+        session[:user].should_not be_nil
+      end
     end
 
     context "with invalid credentials" do
