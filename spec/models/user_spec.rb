@@ -1,0 +1,40 @@
+require 'spec_helper'
+
+describe User do
+
+  before :each do
+    User.collection.remove
+  end
+
+  it "should create a new user if one doesn't exist" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.id.should_not be_nil
+  end
+
+  it "should return an existing user if already exists" do
+    user1 = User.find_or_create "joe@example.com", "password"
+    user2 = User.find_or_create "joe@example.com", "password"
+    user1.id.should.eql? user2.id
+  end
+
+  it "should not create a user if email is invalid" do
+    user = User.find_or_create "joe", "password"
+    user.should_not be_kind_of User 
+  end
+
+  it "should not create a user if no password is given" do
+    user = User.find_or_create "joe@example.com", ""
+    user.should_not be_kind_of User
+  end
+
+  it "should not return a user if exists but password is incorrect" do
+    User.find_or_create "joe@example.com", "password"
+    user = User.find_or_create "joe@example.com", "incorrect_password"
+    user.should_not be_kind_of User
+  end
+
+  it "should generate an email validation token"
+  it "should not be validated"
+  it "should generate an API key"
+
+end

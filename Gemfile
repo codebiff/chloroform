@@ -4,6 +4,7 @@ gem 'rails', '3.2.9'
 
 gem "mongo_mapper"
 gem "bson_ext"
+gem "bcrypt-ruby"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
