@@ -1,4 +1,10 @@
 Chloroform::Application.routes.draw do
+
+  get  "user/index"
+  post "user/login"
+  get  "user/logout"
+  get  "user/account"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
