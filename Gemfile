@@ -6,9 +6,16 @@ gem "mongo_mapper"
 gem "bson_ext"
 gem "bcrypt-ruby"
 
+gem "bootstrap-sass"
+
 group :development, :test do
   gem "rspec-rails"
   gem "capybara"
+end
+
+group :development do
+  gem "rb-fsevent"
+  gem "guard-livereload"
 end
 
 group :test do

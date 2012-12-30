@@ -67,6 +67,14 @@ describe "Users" do
       page.should have_selector "form"
     end
 
+    it "should redirect to the index page if not logged in" do
+      clear_db
+      visit user_logout_path
+      visit user_account_path
+      page.should have_selector "form"
+      page.should have_content "You are not authorized to view that page"
+    end
+
 
   end
 
