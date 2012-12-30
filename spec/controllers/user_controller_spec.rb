@@ -60,4 +60,21 @@ describe UserController do
 
   end
 
+
+  describe "GET 'account'" do
+
+    it "should redirect you back to index if not logged in" do
+      get :account
+      response.should redirect_to user_index_path
+    end
+
+    it "should display correctly if a user is logged in" do
+      post :login, :email => "joe@example.com", :password => "password"
+      get :account
+      response.should be_ok      
+    end
+
+
+  end
+
 end

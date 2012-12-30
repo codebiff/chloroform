@@ -19,6 +19,7 @@ class UserController < ApplicationController
   end
 
   def account
+    authorize!
   end
 
 end
