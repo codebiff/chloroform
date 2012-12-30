@@ -30,6 +30,20 @@ describe UserController do
         response.should redirect_to user_account_path
       end
     end
+
+    context "with invalid credentials" do
+      
+      it "should not create a new user" do
+        clear_db
+        expect{ post :login, :email => "joe@example.com", :password => "" }.to_not change(User, :count)
+      end
+
+      it "should redirect to the index page" do
+        post :login, :email => "joe@example.com", :password => ""
+        response.should redirect_to user_index_path
+      end
+
+    end
   end
 
   describe "GET 'account'"
