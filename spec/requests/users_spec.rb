@@ -55,4 +55,19 @@ describe "Users" do
 
   end
 
+  context "account page" do
+
+    it "should logout via the logout link" do
+      visit user_index_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      page.should have_content "logout"
+      click_link "logout"
+      page.should have_selector "form"
+    end
+
+
+  end
+
 end

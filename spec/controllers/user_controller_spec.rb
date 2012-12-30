@@ -58,6 +58,11 @@ describe UserController do
       response.should redirect_to user_index_path
     end
 
+    it "should clear out the user session" do
+      get :logout
+      session[:user].should be_nil
+    end
+
   end
 
 

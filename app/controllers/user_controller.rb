@@ -15,6 +15,7 @@ class UserController < ApplicationController
   end
 
   def logout
+    session.clear
     redirect_to user_index_path
   end
 
