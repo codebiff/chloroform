@@ -1,2 +1,5 @@
-<h1>User#index</h1>
-<p>Find me in app/views/user/index.html.erb</p>
+<%= form_tag user_login_path do -%>
+  <%= text_field_tag 'email', nil, :placeholder => "your.email@example.com" %>
+  <%= password_field_tag 'password', nil, :placeholer => "***********" %>
+  <%= submit_tag "Login" %>
+<% end -%>
