@@ -15,17 +15,17 @@ class User
       if user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
         user
       else
-        false 
+        "The password was incorrect" 
       end
     else
-      return false if password.empty?
+      return "A password is required" if password.empty?
       u = User.new
       u.email = email.strip
       u.password_salt = BCrypt::Engine.generate_salt
       u.password_hash = BCrypt::Engine.hash_secret(password, u.password_salt)
       u.validation_token = SecureRandom.hex
       u.api_key = SecureRandom.hex
-      return false unless u.save
+      return "Please enter a valid email address" unless u.save
       u
     end
   end
