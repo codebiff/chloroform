@@ -46,6 +46,13 @@ describe UserController do
     end
   end
 
-  describe "GET 'account'"
+  describe "GET 'logout'" do
+    
+    it "should redirect to the index" do
+      get :logout
+      response.should redirect_to user_index_path
+    end
+
+  end
 
 end

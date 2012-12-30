@@ -13,6 +13,7 @@ class UserController < ApplicationController
   end
 
   def logout
+    redirect_to user_index_path
   end
 
   def account
