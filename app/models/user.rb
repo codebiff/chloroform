@@ -6,8 +6,8 @@ class User
   key :email,            String, :format => /@./
   key :password_salt,    String
   key :password_hash,    String
-  key :validation_token, String
-  key :validated,        Boolean, :default => false
+  key :verification_token, String
+  key :verified,         Boolean, :default => false
   key :api_key,          String
 
   def self.find_or_create email, password
@@ -23,11 +23,16 @@ class User
       u.email = email.strip
       u.password_salt = BCrypt::Engine.generate_salt
       u.password_hash = BCrypt::Engine.hash_secret(password, u.password_salt)
-      u.validation_token = SecureRandom.hex
+      u.verification_token = SecureRandom.hex
       u.api_key = SecureRandom.hex
       return "Please enter a valid email address" unless u.save
       u
     end
+  end
+
+  def reset_verification
+    verification_token = SecureRandom.hex
+    save
   end
 
 end

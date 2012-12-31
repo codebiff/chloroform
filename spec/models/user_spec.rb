@@ -33,19 +33,26 @@ describe User do
     user.should_not be_kind_of User
   end
 
-  it "should generate an email validation token" do
+  it "should generate an email verification token" do
     user = User.find_or_create "joe@example.com", "password"
-    user.validation_token.should_not be_nil
+    user.verification_token.should_not be_nil
   end
 
-  it "should not be validated" do
+  it "should not be verified" do
     user = User.find_or_create "joe@example.com", "password"
-    user.validated.should_not be_true 
+    user.verified.should_not be_true 
   end
 
   it "should generate an API key" do
     user = User.find_or_create "joe@example.com", "password"
     user.api_key.should_not be_nil
+  end
+
+  it "should be able to create a new verification token" do
+    user = User.find_or_create "joe@example.com", "password"
+    v1 = user.verification_token
+    user.reset_verification
+    user.verification_token.should_not.eql? v1
   end
 
 end
