@@ -42,7 +42,7 @@ class User
       u.verified = true
       u.save
     else
-      "There was a problem verifying your email"
+      false
     end
   end
 

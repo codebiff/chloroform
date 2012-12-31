@@ -34,8 +34,13 @@ class UserController < ApplicationController
   end
 
   def verify
-    User.verify params[:token]
-    redirect_to root_path
+    if User.verify params[:token]
+      flash[:info] = "Thank you for verifying your email addrress"
+      redirect_to root_path
+    else
+      flash[:error] = "There was a problem with your verification token"
+      redirect_to root_path
+    end
   end
 
 end

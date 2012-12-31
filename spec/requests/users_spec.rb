@@ -98,4 +98,24 @@ describe "Users" do
 
   end
 
+
+  describe "GET 'verify'" do
+    it "should verify an email address if valid" do
+      user = User.find_or_create "joe@example.com", "password"
+      visit "/verify?token=#{user.verification_token}"
+      page.should have_content "verifying your email"
+    end  
+
+    it "should send an error if unknown token sent" do
+      visit "/verify?token=mumbo_jumbo"
+      page.should have_content "problem with your verification token"
+    end
+
+    it "should send an error if no token is present" do
+      visit "/verify"
+      page.should have_content "problem with your verification token"
+    end
+
+  end
+
 end
