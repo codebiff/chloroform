@@ -10,7 +10,7 @@ describe "Users" do
 
     it "should login and redirect to the account page" do
       clear_db
-      visit user_index_path
+      visit root_path
       expect {
         fill_in "email",    with: "joe@example.com"
         fill_in "password", with: "password"
@@ -25,7 +25,7 @@ describe "Users" do
 
     it "no password should not login and redirect back to index" do
       clear_db
-      visit user_index_path
+      visit root_path
       fill_in "email", with: "joe@example.com"
       click_button "Login"
       page.should have_selector "form"
@@ -35,7 +35,7 @@ describe "Users" do
     it "incorrect password for user should redirect to index" do
       clear_db
       User.find_or_create "joe@example.com", "password"
-      visit user_index_path
+      visit root_path
       fill_in "email", with: "joe@example.com"
       fill_in "password", with: "wrong_password"
       click_button "Login"
@@ -45,7 +45,7 @@ describe "Users" do
 
     it "an invalid email is used" do
       clear_db
-      visit user_index_path
+      visit root_path
       fill_in "email", with: "joe_invalid_example.com"
       fill_in "password", with: "password"
       click_button "Login"
@@ -58,7 +58,7 @@ describe "Users" do
   context "account page" do
 
     it "should logout via the logout link" do
-      visit user_index_path
+      visit root_path
       fill_in "email", with: "joe@example.com"
       fill_in "password", with: "password"
       click_button "Login"
@@ -68,11 +68,12 @@ describe "Users" do
     end
 
     it "should redirect to the index page if not logged in" do
+      pending
       clear_db
-      visit user_logout_path
-      visit user_account_path
+      visit logout_path
+      visit account_path
       page.should have_selector "form"
-      page.should have_content "You are not authorized to view that page"
+      page.should have_content "Please login on register to view that page"
     end
 
 

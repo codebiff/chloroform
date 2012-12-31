@@ -13,9 +13,10 @@ describe UserController do
     end
 
     it "should redirect to accounts page if already logged in" do
+      pending
       post :login, :email => "joe@example.com", :password => "password"
       get 'index'
-      response.should redirect_to user_account_path
+      response.should redirect_to account_path
     end
       
   end
@@ -34,7 +35,7 @@ describe UserController do
 
       it "should redirect to the accounts page" do
         post :login, :email => "joe@example.com", :password => "password"
-        response.should redirect_to user_account_path
+        response.should redirect_to account_path
       end
 
       it "should set the user session" do
@@ -52,7 +53,7 @@ describe UserController do
 
       it "should redirect to the index page" do
         post :login, :email => "joe@example.com", :password => ""
-        response.should redirect_to user_index_path
+        response.should redirect_to root_path
       end
 
     end
@@ -62,7 +63,7 @@ describe UserController do
     
     it "should redirect to the index" do
       get :logout
-      response.should redirect_to user_index_path
+      response.should redirect_to root_path
     end
 
     it "should clear out the user session" do
@@ -76,8 +77,9 @@ describe UserController do
   describe "GET 'account'" do
 
     it "should redirect you back to index if not logged in" do
+      get :logout
       get :account
-      response.should redirect_to user_index_path
+      response.should redirect_to root_path
     end
 
     it "should display correctly if a user is logged in" do

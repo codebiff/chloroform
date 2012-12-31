@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
       return true
     else
       flash[:error] = "Please login or register to view that page"
-      page root_path
+      redirect_to root_path
     end
   end
 
