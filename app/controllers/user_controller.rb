@@ -1,6 +1,7 @@
 class UserController < ApplicationController
 
   def index
+    redirect_to account_path if current_user
   end
 
   def login
@@ -27,6 +28,7 @@ class UserController < ApplicationController
   def reset_verification
     authorize!
     current_user.reset_verification
+    flash[:info] = "A new verification email has been sent"
     redirect_to account_path
   end
 

@@ -1,10 +1,10 @@
 <% title "Account" %>
 
-<% if !current_user.validated %>
+<% if !current_user.verified %>
 <div class="alert alert-info alert-block">
   <h4>Verify your email</h4>
   <p>Before you can begin using <strong>Chloroform</strong> you need to verify your email. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem deleniti tempora earum nam libero. Alias nemo debitis repellendus minus fugiat minima odit numquam at nobis quisquam nesciunt illum culpa.</p>
-  <%= link_to "Request a new verification email", "#", :class => "btn btn-small btn-new-verification"  %>
+  <%= link_to "Request a new verification email", reset_verification_url, :class => "btn btn-small btn-new-verification"  %>
 </div>
 <% end %>
 

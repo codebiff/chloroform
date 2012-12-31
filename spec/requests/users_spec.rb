@@ -68,12 +68,31 @@ describe "Users" do
     end
 
     it "should redirect to the index page if not logged in" do
-      pending
       clear_db
       visit logout_path
       visit account_path
       page.should have_selector "form"
-      page.should have_content "Please login on register to view that page"
+      page.should have_content "Please login or register to view that page"
+    end
+
+    it "should reset verification when button pressed" do
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      click_link "Request a new verification email"
+      page.should have_content "A new verification email has been sent"
+    end
+
+    it "should redirect to account page if already logged in" do
+      pending
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      visit root_path
+      find("title").should have_content "Account"
     end
 
 

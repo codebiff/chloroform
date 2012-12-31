@@ -13,7 +13,6 @@ describe UserController do
     end
 
     it "should redirect to accounts page if already logged in" do
-      pending
       post :login, :email => "joe@example.com", :password => "password"
       get 'index'
       response.should redirect_to account_path
