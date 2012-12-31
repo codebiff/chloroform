@@ -4,6 +4,7 @@ describe User do
 
   before :each do
     User.collection.remove
+    ActionMailer::Base.deliveries.clear
   end
 
   it "should create a new user if one doesn't exist" do
@@ -62,6 +63,14 @@ describe User do
 
   it "should send out a verification email when registering" do
     expect { User.find_or_create "joe@example.com", "password" }.to change(ActionMailer::Base.deliveries, :size).by(1)
+    ActionMailer::Base.deliveries.first.body.should include "http://www.example.com/verify?token=#{User.all.first.verification_token}"
+  end
+
+  it "should be able to verify an email address" do
+    user = User.find_or_create "joe@example.com", "password"
+    User.verify user.verification_token
+    user.reload
+    user.verified.should be_true
   end
 
 end

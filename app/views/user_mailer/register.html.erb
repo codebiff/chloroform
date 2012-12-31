@@ -1,5 +1,5 @@
 <p>thank you for registering with Chloroform</p>
 
-<p>Beofre you can begin using Chloroform you need to verify your email address. Please click in the link below to verify</p>
+<p>Before you can begin using Chloroform you need to verify your email address. Please click in the link below to verify</p>
 
-<%= link_to "Verify email", "verify?token=#{@user.verification_token}" %>
+<%= link_to verify_url(:token => @user.verification_token), verify_url(:token => @user.verification_token) %>

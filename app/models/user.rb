@@ -37,4 +37,13 @@ class User
     UserMailer.reset_verification(self).deliver
   end
 
+  def self.verify token
+    if u = User.find_by_verification_token(token)
+      u.verified = true
+      u.save
+    else
+      "There was a problem verifying your email"
+    end
+  end
+
 end

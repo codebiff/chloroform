@@ -6,6 +6,7 @@ Chloroform::Application.routes.draw do
   match "logout" => "user#logout"
   match "account" => "user#account"
 
+  match "verify" => "user#verify"
   match "reset_verification" => "user#reset_verification"
 
   get  "user/index"

@@ -5,6 +5,7 @@ class UserController < ApplicationController
   end
 
   def login
+    @request_host = request.host_with_port
     user = User.find_or_create params[:email], params[:password]
     if user.kind_of? User
       session[:user] = user.id.to_s
@@ -30,6 +31,11 @@ class UserController < ApplicationController
     current_user.reset_verification
     flash[:info] = "A new verification email has been sent"
     redirect_to account_path
+  end
+
+  def verify
+    User.verify params[:token]
+    redirect_to root_path
   end
 
 end
