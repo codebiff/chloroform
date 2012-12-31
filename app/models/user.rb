@@ -26,6 +26,7 @@ class User
       u.verification_token = SecureRandom.hex
       u.api_key = SecureRandom.hex
       return "Please enter a valid email address" unless u.save
+      UserMailer.register(u).deliver
       u
     end
   end
@@ -33,6 +34,7 @@ class User
   def reset_verification
     verification_token = SecureRandom.hex
     save
+    UserMailer.reset_verification(self).deliver
   end
 
 end

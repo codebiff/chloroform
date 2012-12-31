@@ -55,4 +55,13 @@ describe User do
     user.verification_token.should_not.eql? v1
   end
 
+  it "should email a new verification token" do
+    user = User.find_or_create "joe@example.com", "password"
+    expect { user.reset_verification }.to change(ActionMailer::Base.deliveries, :size).by(1)
+  end
+
+  it "should send out a verification email when registering" do
+    expect { User.find_or_create "joe@example.com", "password" }.to change(ActionMailer::Base.deliveries, :size).by(1)
+  end
+
 end
