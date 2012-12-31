@@ -24,4 +24,10 @@ class UserController < ApplicationController
     authorize!
   end
 
+  def reset_verification
+    authorize!
+    current_user.reset_verification
+    redirect_to account_path
+  end
+
 end

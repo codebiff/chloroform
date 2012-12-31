@@ -91,4 +91,12 @@ describe UserController do
 
   end
 
+  describe "GET 'reset_verification'" do
+    it "should return the user to the accounts page" do
+      post :login, :email => "joe@example.com", :password => "password"
+      get :reset_verification
+      response.should redirect_to account_path
+    end
+  end
+
 end
