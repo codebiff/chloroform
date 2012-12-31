@@ -106,14 +106,14 @@ describe UserController do
       get :verify, :token => user.verification_token
       user.reload
       user.verified.should be_true
-      response.should redirect_to root_path
+      response.should redirect_to account_path
     end
 
     it "should return an error if invalid" do
       clear_db
       post :login, :email => "joe@example.com", :password => "password"
       get :verify, :token => "invalid_token"
-      response.should redirect_to root_path
+      response.should redirect_to account_path
     end
   end
 end
