@@ -1,5 +1,11 @@
 Chloroform::Application.routes.draw do
 
+  root :to => "user#index" 
+
+  match "login" => "user#login"
+  match "logout" => "user#logout"
+  match "account" => "user#account"
+
   get  "user/index"
   post "user/login"
   get  "user/logout"

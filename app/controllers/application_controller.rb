@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
     if session[:user]
       return true
     else
-      flash[:error] = "You are not authorized to view that page"
-      redirect_to user_index_path
+      flash[:error] = "Please login or register to view that page"
+      page root_path
     end
   end
 

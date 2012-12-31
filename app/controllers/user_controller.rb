@@ -7,16 +7,17 @@ class UserController < ApplicationController
     user = User.find_or_create params[:email], params[:password]
     if user.kind_of? User
       session[:user] = user.id.to_s
-      redirect_to user_account_path
+      redirect_to account_path
     else
       flash[:error] = user
-      redirect_to user_index_path
+      redirect_to root_path
     end
   end
 
   def logout
     session.clear
-    redirect_to user_index_path
+    flash[:info] = "You have successfully logged out"
+    redirect_to root_path
   end
 
   def account

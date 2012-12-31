@@ -12,7 +12,44 @@
  *= require_tree .
  */
 @import bootstrap
+@import url(http://fonts.googleapis.com/css?family=Oxygen:400,700)
 
 body
-  width: 960px
-  margin: 0 auto
+  font-family: "Oxygen", sans-serif
+  font-size: 13px
+
+.navbar-static-top
+  padding-top: 5px
+  margin-bottom: 15px
+  .navbar-inner
+    position: relative
+    background: none !important
+    border: none !important
+    box-shadow: none
+    #title-logo
+      display: block 
+      width: 204px
+      height: 59px
+      text-indent: -99999px
+      overflow: hidden
+      background: image-url("title-logo.png")
+    .nav-elements
+      display: inline-block
+      position: absolute
+      top: 5px
+      right: 15px
+    .btn-logout
+      margin-top: -1px
+      margin-left: 5px
+
+.flash-message
+  font-weight: 700
+  text-align: center
+
+.login-form
+  text-align: center
+  .btn
+    font-weight: 700
+
+.btn-new-verification
+  margin-top: 10px

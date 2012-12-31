@@ -11,6 +11,13 @@ describe UserController do
       get 'index'
       response.should be_success
     end
+
+    it "should redirect to accounts page if already logged in" do
+      post :login, :email => "joe@example.com", :password => "password"
+      get 'index'
+      response.should redirect_to user_account_path
+    end
+      
   end
 
   describe "POST 'login'" do

@@ -1,17 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chloroform</title>
+  <title><%= yield :title %> &bull; Chloroform</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+  <div class="container">
+    
+      <div class="navbar-static-top">
+       <div class="navbar-inner">
+       
+        <%= link_to "Choloroform", root_url, :id => "title-logo" %>
 
-  <% if flash[:error] -%>
-    <%= flash[:error] %>
-  <% end %>
-<%= yield %>
+        <div class="nav-elements pull-right">
+        <% if current_user %>
+          
+        <div class="btn-group">
+          <a class="btn dropdown-toggle " data-toggle="dropdown" href="#">
+            <%= current_user.email -%>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "API Keys", "#" %></li>
+            <li><%= link_to "Logout", logout_url  %></li>
+          </ul>
+        </div>
+          
+          <%= link_to raw("<i class=\"icon-off\"></i> logout"), logout_url, :class => "btn btn-logout" %>          
+        <% end %>
+        </div>
+        
+       </div>
+     </div> 
+     
+    <% if flash[:error] -%>
+      <div class="alert alert-error flash-message">
+        <%= flash[:error] -%>
+      </div>
+    <% end -%>
+  
+      <% if flash[:info] -%>
+      <div class="alert alert-success flash-message">
+        <%= flash[:info] -%>
+      </div>
+    <% end -%>
+  
+  
+    <%= yield %>
 
+    </div>
 </body>
 </html>
