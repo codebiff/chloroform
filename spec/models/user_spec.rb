@@ -128,4 +128,18 @@ describe User do
     user.submit sample.merge({"confirm_url" => "http://removed-from-data.com"}), "http://example.com"
     JSON.parse(user.messages.first.data).has_key?("confirm_url").should be_false
   end
+
+  context "Settings" do
+
+    it "should have a default date_format setting" do
+      user = User.find_or_create "joe@example.com", "password"
+      user.config.date_format.should_not be_nil 
+      Time.new(1981,06,25,06,05,24).strftime(user.config.date_format).should eq("25/06/1981")
+    end
+
+    it "should have a default date_format setting" do
+      user = User.find_or_create "joe@example.com", "password"
+      user.config.confirm_url.should be_nil 
+    end
+  end
 end

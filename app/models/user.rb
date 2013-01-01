@@ -10,6 +10,7 @@ class User
   key :verified,         Boolean, :default => false
   key :api_key,          String
 
+  many :settings
   many :messages
 
   def self.find_or_create email, password
@@ -27,6 +28,7 @@ class User
       u.password_hash = BCrypt::Engine.hash_secret(password, u.password_salt)
       u.verification_token = SecureRandom.hex
       u.api_key = SecureRandom.hex
+      u.settings.push Setting.new
       return "Please enter a valid email address" unless u.save
       UserMailer.register(u).deliver
       u
@@ -76,5 +78,9 @@ class User
     else
       false
     end
+  end
+
+  def config
+    settings.first
   end
 end
