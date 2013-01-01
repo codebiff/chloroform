@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
 
   def submit
-    if user = User.api_login(params[:api_key])
+    if user = User.find_by_api_key(params[:api_key])
       if user.submit(params, request.env['HTTP_REFERER'])
         render :json => "Success"
       else

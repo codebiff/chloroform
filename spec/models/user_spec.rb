@@ -123,6 +123,22 @@ describe User do
     user.messages.first.confirm_url.should eql "http://another-example.com"
   end
 
+  it "should redirect to config.confirm_url when phen present" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.settings.first.confirm_url = "http://config-set-confirm.com"
+    user.save
+    user.submit sample, "http://example.com"
+    user.reload.messages.first.confirm_url.should eql "http://config-set-confirm.com"
+  end
+
+  it "should redirect to confirm url even if config.confirm_url present" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.settings.first.confirm_url = "http://config-set-confirm.com"
+    user.save
+    user.submit sample.merge({"confirm_url" => "http://another-example.com"}), "http://example.com"
+    user.reload.messages.first.confirm_url.should eql "http://another-example.com"
+  end
+
   it "should not submit :confirm_url in the model" do
     user = User.find_or_create "joe@example.com", "password"
     user.submit sample.merge({"confirm_url" => "http://removed-from-data.com"}), "http://example.com"

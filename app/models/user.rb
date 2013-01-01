@@ -65,19 +65,8 @@ class User
   end
 
   def parse_confirm_url params, referer
-    if params.has_key?("confirm_url")
-      return params["confirm_url"]
-    else
-      return referer
-    end
-  end
-
-  def self.api_login api_key
-    if user = User.find_by_api_key(api_key)
-      user
-    else
-      false
-    end
+    return params["confirm_url"] if params.has_key?("confirm_url")
+    return config.confirm_url || referer
   end
 
   def config
