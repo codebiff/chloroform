@@ -72,4 +72,9 @@ class User
   def config
     settings.first
   end
+
+  def update_settings params
+    params.each {|k,v| config.update_attributes(k.to_sym => v) if config.keys.keys.include?(k)}
+    save
+  end
 end

@@ -1,3 +1,28 @@
-<h1>Settings</h1>
+<% title "Settings" %>
 
-<%= text_field_tag 'confirm_url', current_user.config.confirm_url %>
+<%= form_tag save_settings_url, {:class => "form"} do %>
+
+<div class="well">
+  <h4>Confirmation URL</h4>
+  <p>Enter here the URL to redirect to once a form has been submitted. If blank it will redirect to the original page the form was submitted from.</p>
+
+<div class="input-prepend">
+  <span class="add-on">http://</span>
+  <%= text_field_tag 'confirm_url', @settings.confirm_url, :class => "input-xxlarge", :placeholder => "example.com/thankyou.html" %>
+  </div>
+  <p>This is can be overridded by including <code>confirm_url=http://example.com/thankyou.html</code> in the API path</p>
+</div>
+
+<div class="well">
+  <h4>Date Format</h4>
+  <p>Select the format you wish dates to be displayed on the received forms.</p>
+  <%= select_tag "date_format", options_for_select({"dd/mm/yyyy" => "%d/%m/%Y", "mm/dd/yyyy" => "%m/%d/%Y"}, @settings.date_format) %>
+</div>
+
+
+<%= submit_tag "Save Changes", :class => "btn btn-primary btn-save pull-right" %>
+<%= link_to "Cancel", account_path, :class => "btn btn-danger btn-cancel pull-right" %>
+  
+<% end -%>
+
+

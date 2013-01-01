@@ -44,6 +44,11 @@ class UserController < ApplicationController
 
   def settings
     authorize! 
+    @settings = current_user.config
   end
-  
+
+  def save_settings
+    render :text => params
+  end
+
 end
