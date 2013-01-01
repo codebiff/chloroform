@@ -2,7 +2,7 @@ class ApiController < ApplicationController
 
   def submit
     if user = User.api_login(params[:api_key])
-      if user.submit(params)
+      if user.submit(params, request.env['HTTP_REFERER'])
         render :json => "Success"
       else
         render :json => "No field data", :status => 400

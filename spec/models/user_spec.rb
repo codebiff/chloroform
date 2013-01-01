@@ -111,4 +111,21 @@ describe User do
     api_user.should be_false
   end
 
+  it "should redirect to referer url if no confirm url param" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.submit sample, "http://example.com"
+    user.messages.first.confirm_url.should_not be_nil
+  end
+
+  it "should redirect to referer url with confirm url param" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.submit sample.merge({"confirm_url" => "http://another-example.com"}), "http://example.com"
+    user.messages.first.confirm_url.should eql "http://another-example.com"
+  end
+
+  it "should not submit :confirm_url in the model" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.submit sample.merge({"confirm_url" => "http://removed-from-data.com"}), "http://example.com"
+    JSON.parse(user.messages.first.data).has_key?("confirm_url").should be_false
+  end
 end

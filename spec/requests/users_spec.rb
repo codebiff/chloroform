@@ -95,6 +95,17 @@ describe "Users" do
       find("title").should have_content "Account"
     end
 
+    it "should display messages if present" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      user = User.all.first
+      user.submit :params => {:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"} 
+      visit account_path
+      page.should have_content "Some sample data"
+    end
 
   end
 

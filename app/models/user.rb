@@ -48,8 +48,9 @@ class User
     end
   end
 
-  def submit params
+  def submit params, referer=nil
     m = Message.new
+    m.confirm_url = parse_confirm_url(params, referer)
     fields = clean_params(params).to_json
     return false if JSON.parse(fields).empty?
     m.data = fields
@@ -58,7 +59,15 @@ class User
   end
 
   def clean_params params
-    params.reject {|k,v| ["api_key", "action", "controller"].include? k.to_s}
+    params.reject {|k,v| ["api_key", "action", "controller", "confirm_url"].include? k.to_s}
+  end
+
+  def parse_confirm_url params, referer
+    if params.has_key?("confirm_url")
+      return params["confirm_url"]
+    else
+      return referer
+    end
   end
 
   def self.api_login api_key
