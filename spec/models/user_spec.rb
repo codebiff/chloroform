@@ -130,6 +130,11 @@ describe User do
     JSON.parse(user.messages.first.data).has_key?("confirm_url").should be_false
   end
 
+  it "should not submit any params that start with an underscore" do
+    user.submit sample.merge({"_hideme" => "i hope i am not entered"}), "http://example.com"
+    JSON.parse(user.messages.first.data).has_key?("_hideme").should be_false
+  end
+
   context "Settings" do
 
     it "should have a default date_format setting" do

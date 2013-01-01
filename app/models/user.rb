@@ -61,7 +61,9 @@ class User
   end
 
   def clean_params params
-    params.reject {|k,v| ["api_key", "action", "controller", "confirm_url"].include? k.to_s}
+    cleaned = params.reject {|k,v| ["api_key", "action", "controller", "confirm_url"].include? k.to_s}
+    cleaned = cleaned.reject {|k,v| k.to_s[0] == "_"}
+    cleaned
   end
 
   def parse_confirm_url params, referer
