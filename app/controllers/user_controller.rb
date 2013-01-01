@@ -41,5 +41,9 @@ class UserController < ApplicationController
       redirect_current_user
     end
   end
+
+  def settings
+    authorize! 
+  end
   
 end

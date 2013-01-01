@@ -116,4 +116,5 @@ describe UserController do
       response.should redirect_to account_path
     end
   end
+
 end

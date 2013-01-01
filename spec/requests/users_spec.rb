@@ -68,6 +68,7 @@ describe "Users" do
     end
 
     it "should redirect to the index page if not logged in" do
+      pending "waiting for Capybara to recognize title"
       clear_db
       visit logout_path
       visit account_path
@@ -85,7 +86,7 @@ describe "Users" do
     end
 
     it "should redirect to account page if already logged in" do
-      pending
+      pending "waiting for Capybara to recognize title"
       clear_db
       visit root_path
       fill_in "email", with: "joe@example.com"
@@ -127,6 +128,39 @@ describe "Users" do
       page.should have_content "problem with your verification token"
     end
 
+  end
+
+  describe "GET 'settings'" do
+    it "shouldn't have a confirm_url if none entered into config" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      visit settings_path
+      find_field("confirm_url").value.should be_nil
+    end
+
+    it "should have a confirm_url if one entered into config" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      user = User.all.first
+      user.settings.first.confirm_url = "http://example.com"
+      user.save
+      visit settings_path
+      find_field("confirm_url").value.should eql("http://example.com")
+    end
+
+    it "should redirect to the index page if not logged in" do
+      clear_db
+      visit logout_path
+      visit settings_path
+      page.should have_selector "form"
+      page.should have_content "Please login or register to view that page"
+    end
   end
 
 end
