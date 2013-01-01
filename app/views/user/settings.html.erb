@@ -6,15 +6,16 @@
   <h4>Confirmation URL</h4>
   <p>Enter here the URL to redirect to once a form has been submitted. If blank it will redirect to the original page the form was submitted from.</p>
 
-  <%= text_field_tag 'confirm_url', @settings.confirm_url, :class => "input-xxlarge", :placeholder => "example.com/thankyou.html" %>
+  <%= text_field_tag 'confirm_url', @settings.confirm_url, :class => "input-xxlarge", :placeholder => "http://example.com/thankyou.html" %>
   
   <p>This is can be overridden by including <code>confirm_url=http://example.com/thankyou.html</code> in the API path</p>
 </div>
 
 <div class="well">
   <h4>Date Format</h4>
-  <p>Select the format you wish dates to be displayed on the received forms.</p>
+  <p>Select the format you wish time and dates to be displayed on the received forms.</p>
   <%= select_tag "date_format", options_for_select({"dd/mm/yyyy" => "%d/%m/%Y", "mm/dd/yyyy" => "%m/%d/%Y"}, @settings.date_format) %>
+  <%= select_tag "time_format", options_for_select({"12 Hour" => "%l:%M %P", "24 Hour" => "%H:%M"}, @settings.time_format) %>
 </div>
 
 

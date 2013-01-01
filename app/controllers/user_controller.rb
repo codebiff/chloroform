@@ -23,6 +23,7 @@ class UserController < ApplicationController
 
   def account
     authorize!
+    @messages = current_user.messages
   end
 
   def reset_verification

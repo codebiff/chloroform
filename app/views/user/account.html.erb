@@ -1,9 +1,9 @@
 <% title "Account" %>
 
 <% if !current_user.verified %>
-<div class="alert alert-info alert-block">
+<div class="alert alert-error alert-block">
   <h4>Verify your email</h4>
-  <p>Before you can begin using <strong>Chloroform</strong> you need to verify your email. Although you can still receive submissions they can only be viewed here. they will only be emailed to your inbox when your email has been verified</p>
+  <p>Before you can receive emails from <strong>Chloroform</strong> you need to verify your email. Although you can still receive submissions they can only be viewed here. They will only be emailed to your inbox when your email has been verified.</p>
   <%= link_to "Request a new verification email", reset_verification_url, :class => "btn btn-small btn-new-verification"  %>
 </div>
 <% end %>
@@ -13,14 +13,45 @@
   <p>To use <strong>Chloroform</strong> blah blah lorem <code>http://chloroform.codebiff.com/api/submit?api_key=<%= current_user.api_key -%></code> and Lorem ipsum dolor sit amet corporis quas.</p>
 </div>
 
-<div>
+<div id="messages">
   
-  <% if ! current_user.messages.empty? %>
-    <ul>
-    <% current_user.messages.each do |message| %>
-      <li>[<%= message.created_at %>] <%= message.data %></li>
+  <% if ! @messages.empty? %>
+  
+    <h4 class="new-messages">New Messages <span class="badge badge-info"><%= @messages.count %></span></h4>
+  
+    <div class="btn-group message-actions pull-right">
+      <a href="#" class="btn btn-mini"><i class="icon-eye-open"></i> Mark all as read</a>
+      <a href="#" class="btn btn-mini"><i class="icon-trash"></i> Delete all</a>
+    </div>
+
+    <% @messages.reverse.each do |message| %>
+    
+    <table class="table table-bordered message">
+     <thead>
+        <tr class="table-info messsage-unread">
+          <td colspan="2">
+            Received: <%= message.created_at.strftime(current_user.config.date_format) %> at <%= message.created_at.strftime(current_user.config.time_format) %>
+            <%= link_to raw('<i class="icon-trash"></i>'), message_delete_url(:id => message.id.to_s), :title => "Delete this message", :class => "btn btn-mini pull-right" %>
+            <!-- <a href="#" class="btn btn-mini pull-right" title="Delete this message"><i class="icon-trash"></i></a> -->
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+      
+      <% JSON.parse(message.data).each do |k,v| %>
+          
+          <tr>
+            <td class="field" width="25%"><%= k -%></td>
+            <td><%= v -%></td>
+          </tr>
+        
+      <% end %>
+      
+      </tbody>
+    </table>
+        
     <% end %>
-    </ul>
+
   <% else %>
     <p>No messages yet...</p>
   <% end %>

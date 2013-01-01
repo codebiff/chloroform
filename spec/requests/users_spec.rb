@@ -108,6 +108,20 @@ describe "Users" do
       page.should have_content "Some sample data"
     end
 
+    it "should delete a message from the page" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      user = User.all.first
+      5.times { user.submit :params => {:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"} }
+      visit account_path
+      page.should have_css("table.message", :count => 5)
+      within("table.message:first-of-type") { click_link "Delete this message" }
+      page.should have_css("table.message", :count => 4)
+    end
+
   end
 
 
