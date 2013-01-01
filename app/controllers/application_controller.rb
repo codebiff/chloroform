@@ -2,11 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
 
-  before_filter :set_mailer_host
-  def set_mailer_host
-    @request_host = request.host_with_port
-  end
-
   def authorize!
     if session[:user]
       return true

@@ -9,10 +9,7 @@ Chloroform::Application.routes.draw do
   match "verify" => "user#verify"
   match "reset_verification" => "user#reset_verification"
 
-  get  "user/index"
-  post "user/login"
-  get  "user/logout"
-  get  "user/account"
+  post "api/submit"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

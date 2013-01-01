@@ -6,7 +6,7 @@
 
 <p>Registering is as easy as signing in. Just enter your <strong>email</strong> and <strong>password</strong> and if you haven't already got an account we'll create one for you. Once registered you can use your API key to have forms emailed straight to you.</p>
 
-<%= form_tag user_login_path, :class=>"form-inline" do -%>
+<%= form_tag login_path, :class=>"form-inline" do -%>
     
   <%= text_field_tag 'email', nil, :class => "input-xlarge", :placeholder => "your.email@example.com" %>
   <%= password_field_tag 'password', nil, :class => "input-xlarge", :placeholder => "*********" %>

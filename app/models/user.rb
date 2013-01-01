@@ -10,6 +10,8 @@ class User
   key :verified,         Boolean, :default => false
   key :api_key,          String
 
+  many :messages
+
   def self.find_or_create email, password
     if user = User.find_by_email(email.strip)
       if user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
@@ -46,4 +48,24 @@ class User
     end
   end
 
+  def submit params
+    m = Message.new
+    fields = clean_params(params).to_json
+    return false if JSON.parse(fields).empty?
+    m.data = fields
+    messages.push m
+    save
+  end
+
+  def clean_params params
+    params.reject {|k,v| ["api_key", "action", "controller"].include? k.to_s}
+  end
+
+  def self.api_login api_key
+    if user = User.find_by_api_key(api_key)
+      user
+    else
+      false
+    end
+  end
 end

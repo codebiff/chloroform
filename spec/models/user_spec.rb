@@ -73,4 +73,42 @@ describe User do
     user.verified.should be_true
   end
 
+
+  let(:sample) { {"api_key" => "randomapikey", "name" => "Joe Smith", "email" => "joe@example.com", "message" => "This is a sample message"} }
+
+  it "should add a message to a user" do
+    user = User.find_or_create "joe@example.com", "password"
+    expect {user.submit sample}.to change(user.messages, :count).by(1)
+    JSON.parse(user.messages.first.data).has_key?("name").should be_true
+  end
+
+  it "should not submit the api_key to the model" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.submit sample
+    JSON.parse(user.messages.first.data).has_key?("api_key").should be_false
+  end
+
+  it "should not submit :action to the model" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.submit sample
+    JSON.parse(user.messages.first.data).has_key?("action").should be_false
+  end
+
+  it "should not submit :controller to the model" do
+    user = User.find_or_create "joe@example.com", "password"
+    user.submit sample
+    JSON.parse(user.messages.first.data).has_key?("controller").should be_false
+  end
+
+  it "should return a user via the api key" do
+    user = User.find_or_create "joe@example.com", "password"
+    api_user = User.api_login user.api_key
+    api_user.id.should.eql? user.id
+  end
+
+  it "should not return a user if api_key is invalid" do
+    api_user = User.api_login "bullshit_api_key"
+    api_user.should be_false
+  end
+
 end
