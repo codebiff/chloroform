@@ -48,7 +48,10 @@ class UserController < ApplicationController
   end
 
   def save_settings
-    render :text => params
+    authorize!
+    current_user.update_settings params
+    flash[:info] = "Settings have been updated"
+    redirect_current_user
   end
 
 end

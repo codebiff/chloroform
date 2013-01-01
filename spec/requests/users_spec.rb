@@ -162,6 +162,19 @@ describe "Users" do
       page.should have_selector "form"
       page.should have_content "Please login or register to view that page"
     end
+
+    it "should update settings when form submitted" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      visit settings_path
+      fill_in "confirm_url", with: "http://example.com"
+      click_button "Save Changes"
+      User.all.first.config.confirm_url.should eq("http://example.com")
+      page.should have_content "Settings have been updated"
+    end
   end
 
 end

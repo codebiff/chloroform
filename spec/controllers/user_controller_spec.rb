@@ -117,4 +117,13 @@ describe UserController do
     end
   end
 
+  describe "POST 'settings'" do
+    it "should update user settings" do
+      clear_db
+      post :login, :email => "joe@example.com", :password => "password"
+      post :save_settings, {"confirm_url" => "http://example.com"}
+      User.all.first.config.confirm_url.should eq("http://example.com")
+    end
+  end
+
 end

@@ -15,7 +15,7 @@
 
 <div>
   
-  <% if current_user.messages %>
+  <% if ! current_user.messages.empty? %>
     <ul>
     <% current_user.messages.each do |message| %>
       <li>[<%= message.created_at %>] <%= message.data %></li>
