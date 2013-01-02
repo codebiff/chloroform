@@ -1,5 +1,7 @@
 class UserController < ApplicationController
 
+  skip_before_filter :require_login, :except => ["account", "reset_verification", "settings", "save_settings"]
+
   def index
     redirect_to account_path if current_user
   end
@@ -16,18 +18,16 @@ class UserController < ApplicationController
   end
 
   def logout
-    session[:user] = nil
+    reset_session
     flash[:info] = "You have successfully logged out"
     redirect_to root_path
   end
 
   def account
-    authorize!
     @unread_messages = current_user.messages.select{|m| m.read == false}.reverse
   end
 
   def reset_verification
-    authorize!
     current_user.reset_verification
     flash[:info] = "A new verification email has been sent"
     redirect_to account_path
@@ -44,12 +44,10 @@ class UserController < ApplicationController
   end
 
   def settings
-    authorize! 
     @settings = current_user.config
   end
 
   def save_settings
-    authorize!
     current_user.update_settings params
     flash[:info] = "Settings have been updated"
     redirect_current_user

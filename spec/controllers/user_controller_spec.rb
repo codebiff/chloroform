@@ -76,7 +76,6 @@ describe UserController do
   describe "GET 'account'" do
 
     it "should redirect you back to index if not logged in" do
-      pending "Some craziness going on"
       get :logout
       get :account
       response.should redirect_to root_path

@@ -2,13 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
 
-  def authorize!
-    if session[:user]
-      return true
-    else
-      flash[:error] = "Please login or register to view that page"
-      redirect_to root_path
-    end
+  before_filter :require_login
+  
+  def require_login
+    redirect_to root_url unless current_user
   end
 
   def current_user

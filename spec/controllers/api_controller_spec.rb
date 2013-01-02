@@ -10,8 +10,7 @@ describe ApiController do
 
     it "should add form data to the user messages if api_token valid" do
       user = User.find_or_create "joe@example.com", "password"
-      post :submit, {:api_key => user.api_key, :field_one => "Some text"}
-      response.should be_ok
+      post :submit, {:api_key => user.api_key, :field_one => "Some text", :confirm_url => "http://google.com"}
       JSON.parse(user.reload.messages.first.data).has_key?("field_one").should be_true
     end
 

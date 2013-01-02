@@ -1,12 +1,10 @@
 class MessageController < ApplicationController
 
   def index
-    authorize!
     @messages = current_user.messages.reverse
   end
 
   def delete
-    authorize!
     if params[:id]
       current_user.messages.delete_if{|m| m.id.to_s == params[:id]}
       current_user.save
@@ -19,7 +17,6 @@ class MessageController < ApplicationController
   end
 
   def toggle_read 
-    authorize!
     if params[:id]
       current_user.toggle_read(params[:id])
       redirect_to account_path
@@ -30,7 +27,6 @@ class MessageController < ApplicationController
   end
 
   def toggle_all_read
-    authorize!
     messages = current_user.messages.select{|m| m.read == false}
     messages.each {|m| m.read = true}
     current_user.save

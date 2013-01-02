@@ -142,6 +142,11 @@ describe User do
     ActionMailer::Base.deliveries.last.body.should include "This is a sample message"
   end
 
+  it "should NOT email the message if user is NOT verified" do
+    expect { user.submit sample }.to change(ActionMailer::Base.deliveries, :size).by(1)
+    ActionMailer::Base.deliveries.last.body.should_not include "This is a sample message"
+  end
+
   it "should mark a new massage as unread" do
     user.submit sample
     user.messages.first.read.should be_false 
