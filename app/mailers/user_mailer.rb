@@ -10,4 +10,12 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(:to => user.email, :subject => "Chloroform - Reset verification email")
   end
+
+  def send_message user
+    @user = user
+    @message = user.messages.last
+    @data = JSON.parse(@message.data)
+    mail(:to => user.email, :subject => "New message via Chloroform")
+  end
+
 end

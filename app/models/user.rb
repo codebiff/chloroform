@@ -58,6 +58,9 @@ class User
     m.data = fields
     messages.push m
     if save
+      if verified
+        UserMailer.send_message(self).deliver
+      end
       return messages.last
     else
       return false
