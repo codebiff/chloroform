@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
   before_filter :require_login
   
   def require_login
-    redirect_to root_url unless current_user
+    unless current_user
+      flash[:error] = "Please login or register to view that page"
+      redirect_to root_url
+    end
   end
 
   def current_user

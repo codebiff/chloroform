@@ -68,7 +68,6 @@ describe "Users" do
     end
 
     it "should redirect to the index page if not logged in" do
-      pending "waiting for Capybara to recognize title"
       clear_db
       visit logout_path
       visit account_path
@@ -169,7 +168,6 @@ describe "Users" do
     end
 
     it "should redirect to the index page if not logged in" do
-      pending "Cabybara fuckup"
       clear_db
       visit logout_path
       visit settings_path
