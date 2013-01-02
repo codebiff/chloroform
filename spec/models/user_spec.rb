@@ -135,6 +135,21 @@ describe User do
     JSON.parse(user.messages.first.data).has_key?("_hideme").should be_false
   end
 
+  it "should mark a new massage as unread" do
+    user.submit sample
+    user.messages.first.read.should be_false 
+  end
+
+  it "should be ableto toggle a mesages read status" do
+    user.submit sample
+    user.messages.first.read.should be_false 
+    message_id = user.messages.first.id.to_s
+    user.toggle_read message_id
+    user.reload.messages.first.read.should be_true 
+    user.toggle_read message_id
+    user.reload.messages.first.read.should be_false
+  end
+
   context "Settings" do
 
     it "should have a default date_format setting" do
@@ -156,5 +171,10 @@ describe User do
       user.update_settings({"confirm_url" => "specialbrew.com", "date_format" => "%m/%d/%y", "not_in_model" => "Something aweful"})
       user.reload.config.keys.keys.should_not include("not_in_model")
     end
+
+    it "should be able to toggle a message as read or not" do
+      
+    end
+
   end
 end

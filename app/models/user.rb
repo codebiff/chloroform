@@ -71,6 +71,12 @@ class User
     return config.confirm_url || referer
   end
 
+  def toggle_read message_id
+    message = messages.select {|m| m.id.to_s == message_id}.first
+    message.read = toggle(message.read)
+    save
+  end
+
   def config
     settings.first
   end
@@ -78,5 +84,9 @@ class User
   def update_settings params
     params.each {|k,v| config.update_attributes(k.to_sym => v) if config.keys.keys.include?(k)}
     save
+  end
+
+  def toggle param
+    param ? false : true    
   end
 end
