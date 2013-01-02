@@ -15,16 +15,16 @@
 
 <div id="messages">
   
-  <% if ! @messages.empty? %>
+  <% if ! @unread_messages.empty? %>
   
-    <h4 class="new-messages">New Messages <span class="badge badge-info"><%= @messages.count %></span></h4>
+    <h4 class="new-messages">New Messages <span class="badge badge-info"><%= @unread_messages.count %></span></h4>
   
     <div class="btn-group message-actions pull-right">
-      <a href="#" class="btn btn-mini"><i class="icon-eye-open"></i> Mark all as read</a>
+      <%= link_to raw('<i class="icon-eye-open"></i> Mark all as read'), message_toggle_all_read_url, :title => "Mark all messages as read", :class => "btn btn-mini" %>
       <a href="#" class="btn btn-mini"><i class="icon-trash"></i> Delete all</a>
     </div>
 
-    <% @messages.reverse.each do |message| %>
+    <% @unread_messages.each do |message| %>
     
     <table class="table table-bordered message">
      <thead>
@@ -32,6 +32,7 @@
           <td colspan="2">
             Received: <%= message.created_at.strftime(current_user.config.date_format) %> at <%= message.created_at.strftime(current_user.config.time_format) %>
             <%= link_to raw('<i class="icon-trash"></i>'), message_delete_url(:id => message.id.to_s), :title => "Delete this message", :class => "btn btn-mini pull-right" %>
+            <%= link_to raw('<i class="icon-eye-open"></i>'), message_toggle_read_url(:id => message.id.to_s), :title => "Mark this message as read", :class => "btn btn-mini pull-right" %>
             <!-- <a href="#" class="btn btn-mini pull-right" title="Delete this message"><i class="icon-trash"></i></a> -->
           </td>
         </tr>

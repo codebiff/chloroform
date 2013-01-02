@@ -1,0 +1,44 @@
+<% title "All Messages" %>
+
+<div id="messages">
+
+<% if ! @messages.empty? %>
+  
+    <h4 class="new-messages">Messages</h4>
+  
+    <div class="btn-group message-actions pull-right">
+      <a href="#" class="btn btn-mini"><i class="icon-trash"></i> Delete all</a>
+    </div>
+
+    <% @messages.each do |message| %>
+    
+    <table class="table table-bordered message">
+     <thead>
+        <tr class="table-info messsage-unread">
+          <td colspan="2">
+            Received: <%= message.created_at.strftime(current_user.config.date_format) %> at <%= message.created_at.strftime(current_user.config.time_format) %>
+            <%= link_to raw('<i class="icon-trash"></i>'), message_delete_url(:id => message.id.to_s), :title => "Delete this message", :class => "btn btn-mini pull-right" %>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+      
+      <% JSON.parse(message.data).each do |k,v| %>
+          
+          <tr>
+            <td class="field" width="25%"><%= k -%></td>
+            <td><%= v -%></td>
+          </tr>
+        
+      <% end %>
+      
+      </tbody>
+    </table>
+        
+    <% end %>
+
+  <% else %>
+    <p>No messages yet...</p>
+  <% end %>
+
+</div>

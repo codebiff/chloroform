@@ -57,7 +57,11 @@ class User
     return false if JSON.parse(fields).empty?
     m.data = fields
     messages.push m
-    save
+    if save
+      return messages.last
+    else
+      return false
+    end
   end
 
   def clean_params params

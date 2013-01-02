@@ -150,6 +150,7 @@ describe User do
     user.reload.messages.first.read.should be_false
   end
 
+
   context "Settings" do
 
     it "should have a default date_format setting" do

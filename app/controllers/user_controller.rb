@@ -23,7 +23,7 @@ class UserController < ApplicationController
 
   def account
     authorize!
-    @messages = current_user.messages
+    @unread_messages = current_user.messages.select{|m| m.read == false}.reverse
   end
 
   def reset_verification

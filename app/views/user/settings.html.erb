@@ -14,7 +14,7 @@
 <div class="well">
   <h4>Date Format</h4>
   <p>Select the format you wish time and dates to be displayed on the received forms.</p>
-  <%= select_tag "date_format", options_for_select({"dd/mm/yyyy" => "%d/%m/%Y", "mm/dd/yyyy" => "%m/%d/%Y"}, @settings.date_format) %>
+  <%= select_tag "date_format", options_for_select({"dd/mm/yyyy" => "%d/%m/%Y", "mm/dd/yyyy" => "%m/%d/%Y", "01 January, 2013" => "%d %B, %Y"}, @settings.date_format) %>
   <%= select_tag "time_format", options_for_select({"12 Hour" => "%l:%M %P", "24 Hour" => "%H:%M"}, @settings.time_format) %>
 </div>
 
