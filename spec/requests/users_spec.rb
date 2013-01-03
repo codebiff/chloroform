@@ -121,6 +121,24 @@ describe "Users" do
       page.should have_css("table.message", :count => 4)
     end
 
+    it "should mark as message as read" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      user = User.all.first
+      5.times { user.submit :params => {:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"} }
+      visit account_path
+      page.should have_css("table.message", :count => 5)
+      within("table.message:first-of-type") { click_link "Mark as read" }
+      page.should have_css("table.message", :count => 4)
+      visit messages_path
+      within("table.message:first-of-type") { click_link "Mark as unread"}
+      visit account_path
+      page.should have_css("table.message", :count => 5)
+    end
+
     it "should be able to delete all messages" do
       clear_db
       visit root_path
@@ -153,6 +171,18 @@ describe "Users" do
     it "should send an error if no token is present" do
       visit "/verify"
       page.should have_content "problem with your verification token"
+    end
+
+    it "should not log you out if something is submitted" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      user = User.all.first
+      post "/api/submit?api_key=#{user.api_key}&name=joe_example&confirm_url=http://google.com"
+      visit account_path
+      page.should have_content "New Messages"
     end
 
   end

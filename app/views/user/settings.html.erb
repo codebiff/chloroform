@@ -18,6 +18,12 @@
   <%= select_tag "time_format", options_for_select({"12 Hour" => "%l:%M %P", "24 Hour" => "%H:%M"}, @settings.time_format) %>
 </div>
 
+<div class="well">
+  <h4>Reset API key</h4>
+  <p>Reset API key Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim magnam natus illo culpa ea! Earum ipsa natus explicabo repellendus exercitationem pariatur voluptas blanditiis harum dicta similique excepturi unde accusamus minus.</p>
+  <%= link_to "Reset API Key", "#", :class => "btn btn-warning" %>
+
+</div>
 
 <%= submit_tag "Save Changes", :class => "btn btn-primary btn-save pull-right" %>
 <%= link_to "Cancel", account_path, :class => "btn btn-danger btn-cancel pull-right" %>
