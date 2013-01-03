@@ -26,10 +26,10 @@ class MessageController < ApplicationController
   def toggle_read 
     if params[:id]
       current_user.toggle_read(params[:id])
-      redirect_to account_path
+      redirect_to :back
     else
       flash[:error] = "Error with that message"
-      redirect_to account_path
+      redirect_to :back
     end
   end
 
