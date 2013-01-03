@@ -162,6 +162,12 @@ describe User do
     user.reload.messages.first.read.should be_false
   end
 
+  it "should be able to reset api key" do
+    old_api = user.api_key
+    user.reset_api
+    user.reload.api_key.should_not eq(old_api)
+  end
+
 
   context "Settings" do
 

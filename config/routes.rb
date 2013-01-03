@@ -20,4 +20,7 @@ Chloroform::Application.routes.draw do
   get "message/toggle_all_read"
   get "message/delete_all"
 
+  get "user/reset_api_key"
+
+
 end

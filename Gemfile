@@ -18,7 +18,8 @@ group :development do
   gem "guard-livereload"
   gem "rb-inotify"
   gem "meta_request"
-  gem "mailcatcher"
+#  gem "mailcatcher"
+  gem "letter_opener"
 end
 
 group :test do

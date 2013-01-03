@@ -231,6 +231,19 @@ describe "Users" do
       User.all.first.config.confirm_url.should eq("http://example.com")
       page.should have_content "Settings have been updated"
     end
+
+    it "should be able to reset the api_key" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      visit settings_path
+      click_link "Reset API Key"
+      page.should have_content("API Key reset")
+    end 
+
+
   end
 
 end

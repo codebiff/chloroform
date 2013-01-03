@@ -53,6 +53,12 @@ class UserController < ApplicationController
     redirect_current_user
   end
 
+  def reset_api_key
+    current_user.reset_api
+    flash[:info] = "API Key reset"
+    redirect_to account_path
+  end
+
   def help
   end
 

@@ -96,4 +96,11 @@ class User
   def toggle param
     param ? false : true    
   end
+
+  def reset_api
+    self.api_key = SecureRandom.hex
+    save
+  end
+
+
 end
