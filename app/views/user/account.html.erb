@@ -17,7 +17,7 @@
   
   <% if ! @unread_messages.empty? %>
   
-    <h4 class="new-messages">New Messages <span class="badge badge-info"><%= @unread_messages.count %></span></h4>
+    <h4 class="new-messages">Unread Messages <span class="badge badge-info"><%= @unread_messages.count %></span></h4>
   
     <div class="btn-group message-actions pull-right">
       <%= link_to raw('<i class="icon-th"></i> View all'), messages_url, :title => "View all messages", :class => "btn btn-mini" %>
