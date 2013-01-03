@@ -53,4 +53,7 @@ class UserController < ApplicationController
     redirect_current_user
   end
 
+  def help
+  end
+
 end

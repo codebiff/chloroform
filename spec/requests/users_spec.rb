@@ -121,6 +121,20 @@ describe "Users" do
       page.should have_css("table.message", :count => 4)
     end
 
+    it "should be able to delete all messages" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      user = User.all.first
+      5.times { user.submit :params => {:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"} }
+      visit messages_path
+      page.should have_css("table.message", :count => 5)
+      click_link "Delete all"
+      page.should_not have_css("table.message")
+    end
+
   end
 
 

@@ -7,7 +7,7 @@
     <h4 class="new-messages">Messages</h4>
   
     <div class="btn-group message-actions pull-right">
-      <a href="#" class="btn btn-mini"><i class="icon-trash"></i> Delete all</a>
+      <%= link_to raw('<i class="icon-trash"></i> Delete all'), message_delete_all_url, :title => "Delete all messages", :class => "btn btn-mini" %>
     </div>
 
     <% @messages.each do |message| %>

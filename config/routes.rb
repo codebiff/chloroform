@@ -7,6 +7,7 @@ Chloroform::Application.routes.draw do
   match "account" => "user#account"
   match "settings" => "user#settings"
   match "save_settings" => "user#save_settings"
+  match "help" => "user#help"
 
   match "messages" => "message#index"
 
@@ -17,5 +18,6 @@ Chloroform::Application.routes.draw do
   get "message/delete"
   get "message/toggle_read"
   get "message/toggle_all_read"
+  get "message/delete_all"
 
 end

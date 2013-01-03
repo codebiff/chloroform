@@ -16,6 +16,13 @@ class MessageController < ApplicationController
     end
   end
 
+  def delete_all
+    current_user.messages = []
+    current_user.save
+    flash[:info] = "All messages deleted"
+    redirect_to :back
+  end
+
   def toggle_read 
     if params[:id]
       current_user.toggle_read(params[:id])
