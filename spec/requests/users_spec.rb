@@ -182,7 +182,7 @@ describe "Users" do
       user = User.all.first
       post "/api/submit?api_key=#{user.api_key}&name=joe_example&confirm_url=http://google.com"
       visit account_path
-      page.should have_content "New Messages"
+      page.should have_content "Unread Messages"
     end
 
   end
