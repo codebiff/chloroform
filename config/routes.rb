@@ -14,7 +14,8 @@ Chloroform::Application.routes.draw do
   match "verify" => "user#verify"
   match "reset_verification" => "user#reset_verification"
 
-  post "api/submit"
+  match "api/submit" => "api#submit"
+
   get "message/delete"
   get "message/toggle_read"
   get "message/toggle_all_read"
