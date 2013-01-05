@@ -1,12 +1,14 @@
+<body style="font-family:arial,sans-serif">
 <p>A new message!</p>
 
-<table>
+<table style="width:80%;margin:0 auto; border: 1px solid #ccc;">
   <tbody>
     <% @data.each do |k,v| %>
       <tr>
-        <td width="20%"><%= k %></td>
+        <td width="20%" style="font-weight:bold"><%= k %></td>
         <td><%= v %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</body>
