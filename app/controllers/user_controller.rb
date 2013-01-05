@@ -62,4 +62,7 @@ class UserController < ApplicationController
   def help
   end
 
+  def example
+  end
+
 end

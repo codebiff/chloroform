@@ -1,5 +1,7 @@
-<p>Reset</p>
+<h3>Chloroform - New verification link</h3>
 
-<p>In order to verify you email address you need to click on the link below (or copy/paste into your borowser)</p>
+<p>In order to verify you email address you need to click on the link below</p>
 
 <%= link_to verify_url(:token => @user.verification_token), verify_url(:token => @user.verification_token) %>
+
+<p>If you didn't request verification you can ignore this email.</p>

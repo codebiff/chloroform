@@ -10,7 +10,8 @@
 
 <div class="alert alert-success alert-block">
   <h4>Your API key</h4>
-  <p>To use <strong>Chloroform</strong> blah blah lorem <code>http://chloroform.codebiff.com/api/submit?api_key=<%= current_user.api_key -%></code> and Lorem ipsum dolor sit amet corporis quas.</p>
+  <p>Ensure sure your form <code>action</code> is <code>http://chloroform.codebiff.com/api/submit?api_key=<%= current_user.api_key -%></code></p>
+  <p>To get started see the <%= link_to "example form", example_url %></p>
 </div>
 
 <div id="messages">
@@ -53,7 +54,10 @@
     <% end %>
 
   <% else %>
-    <p>No new messages...</p>
+    <div class="center-this">
+      <h3>No new messages...</h3>
+      <%= link_to "View all messages", messages_url %>
+    </div>
   <% end %>
   
 </div>
