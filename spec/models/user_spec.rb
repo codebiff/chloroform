@@ -190,10 +190,6 @@ describe User do
       user.update_settings({"confirm_url" => "specialbrew.com", "date_format" => "%m/%d/%y", "not_in_model" => "Something aweful"})
       user.reload.config.keys.keys.should_not include("not_in_model")
     end
-
-    it "should be able to toggle a message as read or not" do
-      
-    end
-
+    
   end
 end
