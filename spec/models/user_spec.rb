@@ -9,9 +9,7 @@ describe User do
 
   let(:user) { User.find_or_create "joe@example.com", "password" }
 
-  it "should create a new user if one doesn't exist" do
-    user.id.should_not be_nil
-  end
+  it { user.id.should_not be_nil }
 
   it "should return an existing user if already exists" do
     user2 = User.find_or_create "joe@example.com", "password"
@@ -34,17 +32,9 @@ describe User do
     user2.should_not be_kind_of User
   end
 
-  it "should generate an email verification token" do
-    user.verification_token.should_not be_nil
-  end
-
-  it "should not be verified" do
-    user.verified.should_not be_true 
-  end
-
-  it "should generate an API key" do
-    user.api_key.should_not be_nil
-  end
+  it { user.verification_token.should_not be_nil }
+  it { user.verified.should_not be_true }
+  it { user.api_key.should_not be_nil }
 
   it "should be able to create a new verification token" do
     v1 = user.verification_token
