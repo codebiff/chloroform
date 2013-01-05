@@ -59,9 +59,6 @@ class UserController < ApplicationController
     redirect_to account_path
   end
 
-  def help
-  end
-
   def example
   end
 

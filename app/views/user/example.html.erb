@@ -2,13 +2,60 @@
 
 <h3>Example Form</h3>
 
-<div class="well">
+<div>
   <pre>
-    <code>
-      <form action="" method="post">
-        <input type="text" name="Name" />
-      </form> 
-    </code>
+&lt;form action=&quot;http://chloroform.codebiff.com/api/submit?api_key=<%= current_user.api_key -%>&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;confirm_url&quot; value=&quot;http://example.com/thankyou.html&quot; /&gt;
+  &lt;p&gt;Name: &lt;input type=&quot;text&quot; name=&quot;Name&quot;/&gt;&lt;/p&gt;
+  &lt;p&gt;Email: &lt;input type=&quot;text&quot; name=&quot;Email&quot;/&gt;&lt;/p&gt;
+  &lt;p&gt;Comment:&lt;/p&gt;
+  &lt;textarea name=&quot;Comment&quot;&gt;&lt;/textarea&gt;
+  &lt;p&gt;&lt;input type=&quot;submit&quot; name=&quot;_submit&quot; value=&quot;Send&quot; /&gt;&lt;p&gt;  
+&lt;/form&gt;
   </pre>
+</div>
 
+<p style="text-align:center"><strong>Once submitted will become...</strong></p>
+
+<div id="messages">
+<table class="table table-bordered message">
+     <thead>
+        <tr class="table-info messsage-unread">
+          <td colspan="2">
+            Received: 05/01/2013 at 20:14
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td class="field" width="25%">Name</td>
+            <td>Joe Example</td>
+          </tr> 
+          <tr>
+            <td class="field" width="25%">Email</td>
+            <td>joe@example.com</td>
+          </tr>
+          <tr>
+            <td class="field" width="25%">Comment</td>
+            <td>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</td>
+          </tr>
+      </tbody>
+    </table>
+</div>
+
+<h3>How to use Chloroform</h3>
+
+<div class="well well-small">
+  <h4>Form</h4>
+  <p>The form <code>action</code> needs to point to the Chloroform API. The API key is included in this example but it could also be included in a hidden <code>input</code> field. It is also recommended that the form uses the <strong>POST</strong> <code>method</code> when submitting although <strong>GET</strong> requests will still be accepted.</p>
+</div>
+
+<div class="well well-small">
+  <h4>Confirm URL</h4>
+  <p>A <code>confirm_url</code> is not required but is recommended. A confirmation URL can be entered on the <%= link_to "settings page", settings_url %>. It can also be passed in via the API URL or as a hidden input on the form. If a confirm URL is neither present in the user settings or the submitted form then the user will be redirected to the original page the form was submitted from.</p>
+</div>
+
+<div class="well well-small">
+  <h4>Underscore - Ignored Inputs</h4>
+  <p>All fields in the form are submitted via the API. Sometimes though, such as with the submit button in the example, some fields should remain hidden from the final output. Any field name beginning with an underscore will be filtered out and not displayed.</p>
 </div>
