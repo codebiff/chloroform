@@ -6,6 +6,8 @@ describe UserController do
     User.collection.remove
   end
 
+  let(:user) { User.all.first }
+
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
@@ -102,10 +104,8 @@ describe UserController do
     it "should verify a user if valid" do
       clear_db
       post :login, :email => "joe@example.com", :password => "password"
-      user = User.all.first
       get :verify, :token => user.verification_token
-      user.reload
-      user.verified.should be_true
+      user.reload.verified.should be_true
       response.should redirect_to account_path
     end
 
@@ -122,7 +122,7 @@ describe UserController do
       clear_db
       post :login, :email => "joe@example.com", :password => "password"
       post :save_settings, {"confirm_url" => "http://example.com"}
-      User.all.first.config.confirm_url.should eq("http://example.com")
+      user.config.confirm_url.should eq("http://example.com")
     end
   end
 
