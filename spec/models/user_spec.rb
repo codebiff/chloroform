@@ -176,8 +176,9 @@ describe User do
       Time.new(1981,06,25,06,05,24).strftime(user.config.date_format).should eq("25/06/1981")
     end
 
-    it "should have a default date_format setting" do
-      user.config.confirm_url.should be_nil 
+    it "should have a default time_format setting" do
+      user.config.time_format.should_not be_nil 
+      Time.new(1981,06,25,06,05,24).strftime(user.config.time_format).should eq("06:05")
     end
 
     it "can update the settings from params" do
