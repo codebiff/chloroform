@@ -3,12 +3,12 @@ require "bcrypt"
 class User
   include MongoMapper::Document
 
-  key :email,            String, :format => /@./
-  key :password_salt,    String
-  key :password_hash,    String
+  key :email,              String,  :format => /@./
+  key :password_salt,      String
+  key :password_hash,      String
   key :verification_token, String
-  key :verified,         Boolean, :default => false
-  key :api_key,          String
+  key :verified,           Boolean, :default => false
+  key :api_key,            String
 
   many :settings
   many :messages
@@ -101,6 +101,5 @@ class User
     self.api_key = SecureRandom.hex
     save
   end
-
 
 end
