@@ -7,50 +7,19 @@
     <h4 class="new-messages">Messages <span class="badge"><%= @messages.count %></span></h4>
   
     <div class="btn-group message-actions pull-right">
-    
       <%= link_to raw('<i class="icon-eye-close"></i> View unread'), account_url, :title => "View unread messages", :class => "btn btn-mini" %>
-    
       <%= link_to raw('<i class="icon-trash"></i> Delete all'), message_delete_all_url, :title => "Delete all messages", :class => "btn btn-mini delete-all" %>
-      
     </div>
 
     <% @messages.each do |message| %>
-    
-    <table class="table table-bordered message">
-     <thead>
-        <tr class="table-info messsage-unread">
-          <td colspan="2">
-            Received: <%= message.created_at.strftime(current_user.config.date_format) %> at <%= message.created_at.strftime(current_user.config.time_format) %>
-            
-            <%= link_to raw('<i class="icon-trash"></i>'), message_delete_url(:id => message.id.to_s), :title => "Delete this message", :class => "btn btn-mini pull-right delete-message" %>
-            
-            <% if message.read %>
-              <%= link_to raw('<i class="icon-eye-close"></i>'), message_toggle_read_url(:id => message.id.to_s), :title => "Mark as unread", :class => "btn btn-mini pull-right" %>
-            <% else %>
-             <%= link_to raw('<i class="icon-eye-open"></i>'), message_toggle_read_url(:id => message.id.to_s), :title => "Mark as read", :class => "btn btn-mini pull-right" %>
-            <% end %>
-            
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-      
-      <% JSON.parse(message.data).each do |k,v| %>
-          
-          <tr>
-            <td class="field" width="25%"><%= k -%></td>
-            <td><%= v -%></td>
-          </tr>
-        
-      <% end %>
-      
-      </tbody>
-    </table>
-        
+      <%= render :partial => 'shared/message', :locals => {:message => message} %>
     <% end %>
 
   <% else %>
-    <p>No messages yet...</p>
+    <div class="center-this">
+      <h3>No messages...</h3>
+      <p>Find out <%= link_to raw("how to start using <strong>Chloroform</strong>"), example_url %></p>
+    </div>
   <% end %>
 
 </div>

@@ -4,4 +4,8 @@ module ApplicationHelper
     content_for :title, page_title.to_s
   end
 
+  def read_status message
+    message.read ? "warning" : "info"    
+  end
+
 end

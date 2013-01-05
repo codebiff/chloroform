@@ -47,15 +47,15 @@
 
 <div class="well well-small">
   <h4>Form</h4>
-  <p>The form <code>action</code> needs to point to the Chloroform API. The API key is included in this example but it could also be included in a hidden <code>input</code> field. It is also recommended that the form uses the <strong>POST</strong> <code>method</code> when submitting although <strong>GET</strong> requests will still be accepted.</p>
+  <p>The form <code>action</code> needs to point to the Chloroform API. The API key is included in the URL in this example but it could also be included in a hidden <code>input</code>. It is also recommended that the form uses the <strong>POST</strong> <code>method</code> when submitting although <strong>GET</strong> requests will still be accepted.</p>
 </div>
 
 <div class="well well-small">
   <h4>Confirm URL</h4>
-  <p>A <code>confirm_url</code> is not required but is recommended. A confirmation URL can be entered on the <%= link_to "settings page", settings_url %>. It can also be passed in via the API URL or as a hidden input on the form. If a confirm URL is neither present in the user settings or the submitted form then the user will be redirected to the original page the form was submitted from.</p>
+  <p>A <code>confirm_url</code> is not required but is recommended. A confirmation URL can be entered on the <%= link_to "settings page", settings_url %>. It can also be passed in via the API URL or as a hidden input on the form. This will <strong>override</strong> the URL in the settings. If a confirmation   URL is neither present in the user settings or the submitted form then the user will be redirected to the original page the form was submitted from.</p>
 </div>
 
 <div class="well well-small">
   <h4>Underscore - Ignored Inputs</h4>
-  <p>All fields in the form are submitted via the API. Sometimes though, such as with the submit button in the example, some fields should remain hidden from the final output. Any field name beginning with an underscore will be filtered out and not displayed.</p>
+  <p>All inputs in the form are submitted via the API. Sometimes though, such as with the submit button in the example <code>name="_submit"</code>, some inputs should remain hidden from the final output. Any input name beginning with an underscore will be filtered out and not displayed.</p>
 </div>
