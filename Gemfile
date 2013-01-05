@@ -18,12 +18,12 @@ group :development do
   gem "guard-livereload"
   gem "rb-inotify"
   gem "meta_request"
-#  gem "mailcatcher"
   gem "letter_opener"
 end
 
 group :test do
   gem "launchy"
+  gem "spork-rails"
 end
 
 group :assets do
