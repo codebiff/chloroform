@@ -13,6 +13,8 @@ class User
   many :settings
   many :messages
 
+  timestamps!
+
   def self.find_or_create email, password
     if user = User.find_by_email(email.strip)
       if user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
