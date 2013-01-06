@@ -24,12 +24,12 @@ class User
       end
     else
       return "A password is required" if password.empty?
-      u = User.new
-      u.email = email.strip
-      u.password_salt = BCrypt::Engine.generate_salt
-      u.password_hash = BCrypt::Engine.hash_secret(password, u.password_salt)
+      u                    = User.new
+      u.email              = email.strip
+      u.password_salt      = BCrypt::Engine.generate_salt
+      u.password_hash      = BCrypt::Engine.hash_secret(password, u.password_salt)
       u.verification_token = SecureRandom.hex
-      u.api_key = SecureRandom.hex
+      u.api_key            = SecureRandom.hex
       u.settings.push Setting.new
       return "Please enter a valid email address" unless u.save
       UserMailer.register(u).deliver
@@ -53,11 +53,11 @@ class User
   end
 
   def submit params, referer=nil
-    m = Message.new
+    m             = Message.new
     m.confirm_url = parse_confirm_url(params, referer)
-    fields = clean_params(params).to_json
+    fields        = clean_params(params).to_json
     return false if JSON.parse(fields).empty?
-    m.data = fields
+    m.data        = fields
     messages.push m
     if save
       if verified
