@@ -1,14 +1,19 @@
 <body style="font-family:arial,sans-serif">
-<p>A new message!</p>
+<p>You have received a new message via <strong>Chloroform</strong></p>
 
-<table style="width:80%;margin:0 auto; border: 1px solid #ccc;">
+<table style="width:80%;margin:0 auto; border: 2px solid #ccc; padding:5px;border-collapse:collapse;">
   <tbody>
+
     <% @data.each do |k,v| %>
       <tr>
-        <td width="20%" style="font-weight:bold"><%= k %></td>
-        <td><%= v %></td>
+        <td width="20%" style="font-weight:bold; border: 1px solid #ccc;padding:5px;"><%= k %></td>
+        <td style="border:1px solid #ccc;padding:5px;"><%= v %></td>
       </tr>
     <% end %>
+
   </tbody>
 </table>
+
+<p>You can view this message on your <%= link_to "account page", account_url %>.</p>
+
 </body>
