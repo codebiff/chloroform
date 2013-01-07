@@ -3,13 +3,15 @@
 <% if !current_user.verified %>
 <div class="alert alert-error alert-block">
   <h4>Verify your email</h4>
-  <p>Before you can receive emails from <strong>Chloroform</strong> you need to verify your email. Although you can still receive submissions they can only be viewed here. They will only be emailed to your inbox when your email has been verified.</p>
+  <P></P>
+  <p><strong>Go check your inbox.</strong> Before you can receive emails from <strong>Chloroform</strong> you need to verify your email address. Although you can still receive submissions they can only be viewed here. They will only be emailed to your inbox when your email has been verified.</p>
   <%= link_to "Request a new verification email", reset_verification_url, :class => "btn btn-small btn-new-verification"  %>
 </div>
 <% end %>
 
 <div class="alert alert-success alert-block">
   <h4>Your API key</h4>
+  <p></p>
   <p>Ensure sure your form goes to <code>http://chloroform.codebiff.com/api/submit?api_key=<%= current_user.api_key -%></code></p>
   <p>To get started see the <strong><%= link_to "example form", example_url %></strong></p>
 </div>

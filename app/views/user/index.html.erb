@@ -1,23 +1,19 @@
 <% title "Welcome" %>
 
 <div class="intro">
-  <p><strong>Chloroform</strong> sends a forms contents directly to your email. It's perfect for contact forms or any other form submitting text.</p>
-
-  <p>Simply add your generated API key to your forms and anything submitted will be emailed directly to your inbox. You can also mangage your received mesages on this site.</p>
-
-  <p><strong>Chloroform</strong> is perfect for static sites and sites unable to send email from the server</p>
+  <p><strong>Chloroform</strong> serves form data to your inbox. It's perfect for static sites or servers unable to deliver email.</p>
 </div>
 
 <div class="well well-small login-form">
 
-<p>Registering is as easy as signing in. Just enter your <strong>email</strong> and <strong>password</strong> and if you haven't already got an account we'll create one for you. Once registered you can use your API key to have forms emailed straight to you.</p>
+<h3>Login - Register</h3>
 
-<%= form_tag login_path, :class=>"form-inline" do -%>
-    
+<%= form_tag login_path, :class=>"form-inline" do %>
   <%= text_field_tag 'email', nil, :class => "input-xlarge", :placeholder => "your.email@example.com" %>
   <%= password_field_tag 'password', nil, :class => "input-xlarge", :placeholder => "*********" %>
   <%= submit_tag "Login", :class => "btn btn-info" %>
+<% end %>
 
-<% end -%>
+<span class="help-block">If your account doesn't exist one will be created for you.</span>
 
 </div>
