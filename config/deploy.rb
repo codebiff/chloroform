@@ -3,15 +3,13 @@ require "bundler/capistrano"
 set :application, "chloroform"
 set :user, "dave"
 set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:codebiff/#{application}.git"
-set :branch, "master"
 
 set :bundle_flags, "--deployment --quiet --binstubs --shebang ruby-local-exec"
-set (:bundle_cmd) { "#{release_path}/bin/bundle" }
+# set (:bundle_cmd) { "#{release_path}/bin/bundle" }
 set :default_environment, { 'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH" }
 
 server "codebiff.com", :app, :web, :db, :primary => true
