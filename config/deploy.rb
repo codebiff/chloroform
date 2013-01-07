@@ -10,6 +10,10 @@ set :scm, "git"
 set :repository, "git@github.com:codebiff/#{application}.git"
 set :branch, "master"
 
+set :bundle_flags, "--deployment --quiet --binstubs --shebang ruby-local-exec"
+set (:bundle_cmd) { "#{release_path}/bin/bundle" }
+set :default_environment, { 'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH" }
+
 server "codebiff.com", :app, :web, :db, :primary => true
 
 default_run_options[:pty] = true
