@@ -162,7 +162,6 @@ describe "Users" do
       user = User.all.first
       user.submit({api_key: user.api_key, list: ["one", "two", "three"]}) 
       visit account_path
-      save_and_open_page
       page.should have_content "one, two, three"
     end
 
