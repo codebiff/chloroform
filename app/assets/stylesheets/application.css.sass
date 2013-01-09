@@ -11,10 +11,13 @@
  *= require_self
  *= require_tree .
  */
+ 
 @import bootstrap
+@import url(http://fonts.googleapis.com/css?family=Actor)
 
 body
   font-size: 13px
+  font-family: Actor, sans-serif
 
 .navbar-static-top
   padding-top: 15px
@@ -75,6 +78,9 @@ body
 
 td.field
   font-weight: 700
+
+table tr:not(:first-of-type)
+  font-family: arial, sans-serif
 
 .table-info
   font-weight: 700
