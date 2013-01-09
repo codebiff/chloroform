@@ -70,7 +70,8 @@ class User
   end
 
   def clean_params params
-    cleaned = params.reject {|k,v| ["api_key", "action", "controller", "confirm_url"].include? k.to_s}
+    params.each {|k,v| params[k] = v.join(", ") if v.kind_of?(Array)}
+    cleaned = params.reject {|k,v| ["api_key", "action", "controller", "confirm_url"].include? k.to_s }
     cleaned = cleaned.reject {|k,v| k.to_s[0] == "_"}
     cleaned
   end

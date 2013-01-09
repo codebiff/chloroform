@@ -116,6 +116,11 @@ describe User do
     user.reload.messages.first.confirm_url.should eql "http://another-example.com"
   end
 
+  it "should convert an array into a string" do
+    user.submit sample.merge({"list" => ["one", "two", "three"] })
+    JSON.parse(user.messages.first.data)["list"].should eq("one, two, three")
+  end
+
   it "should not submit :confirm_url in the model" do
     user.submit sample.merge({"confirm_url" => "http://removed-from-data.com"}), "http://example.com"
     JSON.parse(user.messages.first.data).has_key?("confirm_url").should be_false
