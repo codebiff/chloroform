@@ -9,6 +9,7 @@ class User
   key :verification_token, String
   key :verified,           Boolean, :default => false
   key :api_key,            String
+  key :admin,              Boolean, :default => false
 
   many :settings
   many :messages

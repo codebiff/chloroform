@@ -12,6 +12,8 @@ describe User do
   it { user.id.should_not be_nil }
   it { user.created_at.should_not be_nil}
   
+  it { user.admin.should be_false }
+
   it "should return an existing user if already exists" do
     user2 = User.find_or_create "joe@example.com", "password"
     user.id.should.eql? user2.id

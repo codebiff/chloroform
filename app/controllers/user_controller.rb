@@ -62,4 +62,9 @@ class UserController < ApplicationController
   def example
   end
 
+  def admin
+    admin?
+    @users = User.all
+  end
+
 end

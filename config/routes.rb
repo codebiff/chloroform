@@ -8,6 +8,7 @@ Chloroform::Application.routes.draw do
   match "settings"           => "user#settings"
   match "save_settings"      => "user#save_settings"
   match "example"            => "user#example"
+  match "admin"              => "user#admin"
   
   match "messages"           => "message#index"
   

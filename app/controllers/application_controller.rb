@@ -23,4 +23,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin?
+    if current_user && current_user.admin
+      true
+    else
+      flash[:error] = "You are not authorised to view that page"
+      redirect_to account_path
+    end
+  end
+
 end

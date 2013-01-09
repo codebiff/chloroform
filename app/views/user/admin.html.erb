@@ -1,0 +1,9 @@
+<% title "Admin" %>
+
+<h1>Admin</h1>
+
+<ul>
+<% @users.each do |user| %>
+  <%= content_tag "li", "#{user.email} - #{pluralize(user.messages.count, 'messages')}", :class => "user" %>
+<% end %>
+</ul>

@@ -258,4 +258,21 @@ describe "Users" do
 
   end
 
+  describe "admin section" do
+    it "should should list all the current registered users" do
+      clear_db
+      User.find_or_create("joe@example.com", "password")
+      User.find_or_create("bill@example.com", "password")
+      User.find_or_create("freddy@example.com", "password")
+      User.where(email: "joe@example.com").first.update_attribute(:admin, true)
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      visit admin_path
+      page.should have_css("li.user", :count => 3)
+      save_and_open_page
+    end
+  end
+
 end

@@ -126,4 +126,23 @@ describe UserController do
     end
   end
 
+  describe "GET 'admin" do
+
+    it "should not allow access if user is not admin" do
+      clear_db
+      post :login, :email => "joe@example.com", :password => "password"
+      get :admin
+      response.should be_redirect
+    end
+
+    it "should allow access if user is admin" do
+      clear_db
+      post :login, :email => "joe@example.com", :password => "password"
+      User.all.first.update_attribute(:admin, true)
+      get :admin
+      response.should_not be_redirect
+    end
+    
+  end
+
 end
