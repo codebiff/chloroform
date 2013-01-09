@@ -7,6 +7,7 @@ gem "bson_ext"
 gem "bcrypt-ruby"
 
 gem "bootstrap-sass"
+gem 'google-analytics-rails'
 
 group :development, :test do
   gem "rspec-rails"

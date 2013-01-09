@@ -64,6 +64,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     ffi (1.2.0)
+    google-analytics-rails (0.0.3)
     guard (1.6.1)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
@@ -199,6 +200,7 @@ DEPENDENCIES
   bson_ext
   capybara
   coffee-rails (~> 3.2.1)
+  google-analytics-rails
   guard-livereload
   jquery-rails
   launchy
