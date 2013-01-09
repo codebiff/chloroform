@@ -102,7 +102,7 @@ describe "Users" do
       fill_in "password", with: "password"
       click_button "Login"
       user = User.all.first
-      user.submit :params => {:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"} 
+      user.submit({:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"})
       visit account_path
       page.should have_content "Some sample data"
     end
@@ -114,7 +114,7 @@ describe "Users" do
       fill_in "password", with: "password"
       click_button "Login"
       user = User.all.first
-      5.times { user.submit :params => {:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"} }
+      5.times { user.submit({:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"}) }
       visit account_path
       page.should have_css("table.message", :count => 5)
       within("table.message:first-of-type") { click_link "Delete this message" }
@@ -128,7 +128,7 @@ describe "Users" do
       fill_in "password", with: "password"
       click_button "Login"
       user = User.all.first
-      5.times { user.submit :params => {:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"} }
+      5.times { user.submit({:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"}) }
       visit account_path
       page.should have_css("table.message", :count => 5)
       within("table.message:first-of-type") { click_link "Mark as read" }
@@ -146,11 +146,24 @@ describe "Users" do
       fill_in "password", with: "password"
       click_button "Login"
       user = User.all.first
-      5.times { user.submit :params => {:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"} }
+      5.times { user.submit({:api_key => user.api_key, :field_one => "Some sample data", :field_two => "Some more data"}) }
       visit messages_path
       page.should have_css("table.message", :count => 5)
       click_link "Delete all"
       page.should_not have_css("table.message")
+    end
+
+    it "should display messages if present" do
+      clear_db
+      visit root_path
+      fill_in "email", with: "joe@example.com"
+      fill_in "password", with: "password"
+      click_button "Login"
+      user = User.all.first
+      user.submit({api_key: user.api_key, list: ["one", "two", "three"]}) 
+      visit account_path
+      save_and_open_page
+      page.should have_content "one, two, three"
     end
 
   end
