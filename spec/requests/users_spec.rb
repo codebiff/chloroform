@@ -271,7 +271,6 @@ describe "Users" do
       click_button "Login"
       visit admin_path
       page.should have_css("li.user", :count => 3)
-      save_and_open_page
     end
   end
 
