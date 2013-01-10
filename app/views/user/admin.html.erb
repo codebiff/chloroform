@@ -4,6 +4,6 @@
 
 <ul>
 <% @users.each do |user| %>
-  <%= content_tag "li", "#{user.email} - #{pluralize(user.messages.count, 'messages')}", :class => "user" %>
+  <%= content_tag "li", "#{user.email} - #{pluralize(user.messages.count, 'message')}", :class => "user" %>
 <% end %>
 </ul>
