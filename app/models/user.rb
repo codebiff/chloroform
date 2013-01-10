@@ -34,6 +34,7 @@ class User
       u.settings.push Setting.new
       return "Please enter a valid email address" unless u.save
       UserMailer.register(u).deliver
+      AdminMailer.new_registration(u.email).deliver
       u
     end
   end

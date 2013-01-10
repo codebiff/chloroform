@@ -51,8 +51,13 @@ describe User do
   end
 
   it "should send out a verification email when registering" do
-    expect { User.find_or_create "joe@example.com", "password" }.to change(ActionMailer::Base.deliveries, :size).by(1)
+    expect { User.find_or_create "joe@example.com", "password" }.to change(ActionMailer::Base.deliveries, :size)
     ActionMailer::Base.deliveries.first.body.should include "http://www.example.com/verify?token=#{User.all.first.verification_token}"
+  end
+
+  it "should send out an email to admin when user registers" do
+    expect { User.find_or_create "joe@example.com", "password" }.to change(ActionMailer::Base.deliveries, :size)
+    ActionMailer::Base.deliveries.last.body.should include "joe@example.com"
   end
 
   it "should be able to verify an email address" do
@@ -141,7 +146,7 @@ describe User do
   end
 
   it "should NOT email the message if user is NOT verified" do
-    expect { user.submit sample }.to change(ActionMailer::Base.deliveries, :size).by(1)
+    expect { user.submit sample }.to change(ActionMailer::Base.deliveries, :size)
     ActionMailer::Base.deliveries.last.body.should_not include "This is a sample message"
   end
 
